@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Tarife Öğren</string>
+    <string name="msg_number">Mesaj Gönderilecek Numara</string>
+    <string name="msg_content">Mesaj İçeriği</string>
+    <string name="save_exit">Kaydet ve Çık</string>
+    <string name="sender_msg_mail">Gönderici Gmail Adresi</string>
+    <string name="sender_mail_password">Gmail Şifre</string>
+    <string name="receiver_msg_mail">Lütfen Alıcı Mail Adresini Giriniz</string>
+    <string name="demo_button">Hemen Gönder</string>
+    <string name="info_file">InformationFile</string>
+    <string name="sms_number">mSmsNumber</string>
+    <string name="message">mMessage</string>
+    <string name="sender_mail">mSenderMail</string>
+    <string name="receiver_mail_password">mSenderMailPassword</string>
+    <string name="receiver_mail">mReceiverMail</string>
+    <string name="optional_info">mOptionalInfo</string>
+    <string name="selection">selection</string>
+    <string name="default_value">Default</string>
+    <string name="no_info">Ek Bilgi Verilmedi</string>
+    <string name="extra_info">Ek Bilgi :</string>
+    <string name="operator">Operatörünüz :</string>
+    <string name="turkcell">TURKCELL</string>
+    <string name="vodafone">VODAFONE</string>
+    <string name="telekom">TELEKOM</string>
+    <string name="turkcell_sms_no">2200</string>
+    <string name="turkcell_sms">KALAN</string>
+    <string name="vodafone_sms_no">7000</string>
+    <string name="vodafone_sms">OZET</string>
+    <string name="telekom_sms_no">5555</string>
+    <string name="telekom_sms">SES</string>
+    <string name="settings_saved">Ayarlarınız kayıt edildi</string>
+    <string name="every_day">Her gün öğleden önce 8-10 arası</string>
+    <string name="every_week">Her hafta</string>
+    <string name="every_month">Her ay</string>
+    <string name="mail_will_be_sent">adresinize mail gönderilecektir.</string>
+    <string name="enter_mail_address">Lütfen Mail Adresini Giriniz!</string>
+    <string name="remained_tariff">Kalan Tarife</string>
+    <string name="demo_message">Demo amaçlı mail 2 dakika içersinde şu mail adresine gönderilecek :</string>
+    <string name="remained_tariff_mail">Kalan Tarifeniz ile İlgili Bilginin Gönderilmesini İstediğiniz e-mail Adresini Giriniz</string>
+    <string name="optional_info_edit_text"> Diğer Bilgileri -Tel/Kullanıcı Adı vs- Giriniz.</string>
+    <string name="user_phone_info">Diğer Opsiyonel Bilgileri Giriniz</string>
+    <string name="interval">Gönderilmesini İstediğiniz Sıklığı Seçin</string>
+    <string name="only_once">Sadece Bir Kere Deneme Amaçlı Göndermek İçin \'Hemen Gönder\'e Basınız</string>
+    <string name="help_text">Yardım</string>
+    <string name="info_text">Hakkında</string>
+    <string name="ok">OK</string>
+    <string name="no_internet_connection">Internet bağlantınız yok. Lütfen internete bağlanıp tekrar deneyin.</string>
+    <string name="mail_sent">E-Mail Gönderildi.</string>
+    <string name="help_text_content">Bu program şirket adına kullanılan cep telefonlarının tarife takibini <b>mail ile</b> yapabilmenizi olanaklı kılar.\n\nTarifesini takip etmek istediğiniz telefonlara bu uygulamayı kurarak, telefonların tarifelerinin durumunu kontrol etmek istediğiniz mail adresini
+    giriniz. Seçtiğiniz zaman aralığına göre, her bir cep telefonundan <b>girdiğiniz mail adresine düzenli olarak tarife bilgisi gönderilecektir</b>.
+    Böylece tarifesi bitmeden ilgili telefonlara müdahale edebilirsiniz.
+    \n\n-Girdiğiniz mail adresine bilgiler gelir.
+    \n-Opsiyonel alan <b>zorunlu değildir.</b> Ancak buraya girdiğiniz bilgilerde mail adresinize gönderilir.</string>
+    <string name="info_text_content"><b>Tarife Öğren</b> \n<b>Versiyon 1.0</b>\nBu uygulama <i>Fatih Güzel</i> ve <i>Ahmet Fatih Mustaçoğlu</i> tarafından geliştirilmiştir.</string>
+
+    <array name="time_interval">
+        <item>Her Gün</item>
+        <item>Her Hafta</item>
+        <item>Her Ay</item>
+    </array>
+
+</resources>
+
+
+
