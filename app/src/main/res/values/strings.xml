@@ -52,6 +52,9 @@
     \n\n-Girdiğiniz mail adresine bilgiler gelir.
     \n-Opsiyonel alan <b>zorunlu değildir.</b> Ancak buraya girdiğiniz bilgilerde mail adresinize gönderilir.</string>
     <string name="info_text_content"><b>Tarife Öğren</b> \n<b>Versiyon 1.0</b>\nBu uygulama <i>Fatih Güzel</i> ve <i>Ahmet Fatih Mustaçoğlu</i> tarafından geliştirilmiştir.</string>
+    <string name="sms_grant_info">SMS gönderebilmek ve alabilmek için izin vermelisiniz</string>
+    <string name="sms_grant_allowed">SMS göndermek ve almak için izin verildi</string>
+    <string name="sms_grant_denied">SMS gönderme ve alma izni reddedildi</string>
 
     <array name="time_interval">
         <item>Her Gün</item>

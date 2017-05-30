@@ -1,5 +1,7 @@
 package mobile.com.tarifeogren;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.com.tarifeogren.R;
@@ -9,8 +11,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,12 +36,15 @@ import java.util.Calendar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by Fatih on 18.05.2017.
  */
 
 public class StartupActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST = 100;
     private AlarmManager alarmMgr;
     private PendingIntent alarmIntent;
     private String DEFAULT_INFO = " Ek Bilgi Verilmedi";
@@ -50,6 +60,8 @@ public class StartupActivity extends AppCompatActivity {
     EditText mMailEditText;
     @BindView(R.id.time_interval_spinner)
     Spinner mTimeIntervalSpinner;
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout mCoordinatorLayout;
 
     String mSmsNumber = "";
     String mMessage = "";
@@ -76,14 +88,14 @@ public class StartupActivity extends AppCompatActivity {
     public void onClick(View view) {
           switch (view.getId()) {
                 case R.id.save_and_exit:
-                    sendSmsAccordingToTimeInterval();
+                    checkAndSendSMSAccordingToTimeInterval();
                     break;
                 case R.id.demo_button:
                     //Control whether there is connection, if yes then trigger the sms  action otherwise warn the user there is no internet connection
                     mConnectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo activeNetwork = mConnectivityManager.getActiveNetworkInfo();
                     if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                        sendSmsImmediately();
+                     checkAndSendSMSImmediately();
                     }else {
                         Toast.makeText(this, getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                     }
@@ -179,7 +191,6 @@ public class StartupActivity extends AppCompatActivity {
     }
     //Send an Sms and an E-Mail in 2 Minutes for demo purpose
     private void sendSmsImmediately() {
-
         if(!mMailEditText.getText().toString().trim().isEmpty() && mMailEditText.getText().toString().trim().contains("@")) {
             mMail = mMailEditText.getText().toString().trim();
             if (!mOptionalInfoEditText.getText().toString().trim().isEmpty()){
@@ -216,5 +227,70 @@ public class StartupActivity extends AppCompatActivity {
         editor.putString(getResources().getString(R.string.optional_info), mOptionalInfo);
         editor.putInt(getResources().getString(R.string.selection), selection);
         editor.apply();
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void checkAndSendSMSImmediately(){
+    final String [] PERMISSIONS = {Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.SEND_SMS)) {
+                    Snackbar.make(mCoordinatorLayout, getResources().getString(R.string.sms_grant_info),
+                            Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestPermissions(PERMISSIONS, PERMISSION_REQUEST);
+                        }
+                    }).show();
+                } else {
+                    requestPermissions(PERMISSIONS, PERMISSION_REQUEST);
+                }
+            } else {
+                sendSmsImmediately();
+            }
+        } else {
+            sendSmsImmediately();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void checkAndSendSMSAccordingToTimeInterval(){
+        final String [] PERMISSIONS = {Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.SEND_SMS)) {
+                    Snackbar.make(mCoordinatorLayout, getResources().getString(R.string.sms_grant_info),
+                            Snackbar.LENGTH_LONG).setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            requestPermissions(PERMISSIONS, PERMISSION_REQUEST);
+                        }
+                    }).show();
+                } else {
+                    requestPermissions(PERMISSIONS, PERMISSION_REQUEST);
+                }
+            } else {
+                sendSmsAccordingToTimeInterval();
+            }
+        } else {
+            sendSmsAccordingToTimeInterval();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            Snackbar.make(mCoordinatorLayout,getResources().getString(R.string.sms_grant_allowed),
+                    Snackbar.LENGTH_LONG).show();
+            sendSmsImmediately();
+
+        } else {
+
+            Snackbar.make(mCoordinatorLayout, getResources().getString(R.string.sms_grant_denied),
+                    Snackbar.LENGTH_LONG).show();
+
+        }
     }
 }
